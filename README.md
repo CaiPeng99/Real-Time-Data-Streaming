@@ -16,18 +16,7 @@ This project demonstrates a real-time data streaming architecture built using mo
 - **PostgreSQL** – Backend metadata DB for Airflow
 - **Schema Registry & Control Center** – Kafka schema & monitoring
 
-## 📁 Folder Structure
-├── dags/ # Airflow DAGs for data generation and Kafka streaming
-│ └── kafka_stream.py
-├── script/
-│ └── entrypoint.sh # Entrypoint for Airflow containers
-├── spark_stream.py # Main Spark job for Kafka to Cassandra
-├── docker-compose.yml # Service definitions
-├── Dockerfile # (Optional) Build Spark images
-├── requirements.txt # Python requirements
-├── run.sh, run-docker.sh # Helper scripts
-└── jars/, path/, venv/ # (Optional) Dependencies and paths
-
+<pre> ## 📁 Folder Structure ``` . ├── dags/ # Airflow DAGs for data generation and Kafka streaming │ └── kafka_stream.py ├── script/ │ └── entrypoint.sh # Entrypoint for Airflow containers ├── spark_stream.py # Main Spark job for Kafka to Cassandra ├── docker-compose.yml # Service definitions ├── Dockerfile # (Optional) Build Spark images ├── requirements.txt # Python requirements ├── run.sh, run-docker.sh # Helper scripts └── jars/, path/, venv/ # (Optional) Dependencies and paths ``` </pre>
 
 ---
 
