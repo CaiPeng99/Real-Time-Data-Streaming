@@ -111,8 +111,10 @@ All services are containerized and orchestrated via Docker Compose.
 Enter Cassandra:
 ```py
 docker exec -it cassandra cqlsh -u cassandra -p cassandra localhost 9042
+```
 
 Use `cqlsh` inside the Cassandra container to validate data insertion:
 
 ```sql
 SELECT * FROM spark_streams.created_users;
+```
