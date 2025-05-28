@@ -106,6 +106,52 @@ All services are containerized and orchestrated via Docker Compose.
 
 ---
 
+## 🛠️ Setup Instructions
+
+### 1. Create a Virtual Environment
+
+To isolate dependencies and ensure reproducibility:
+
+```bash
+python -m venv venv
+```
+
+### 2. Activate the Virtual Environment
+macOS / Linux:
+```bash
+source venv/bin/activate
+```
+
+Windows:
+```bash
+venv\Scripts\activate
+```
+
+### 3. Install Required Python Packages
+Make sure you have the necessary Python packages installed:
+
+```py
+pip install apache-airflow
+pip install kafka-python
+pip install cassandra-driver
+pip install stark pystark
+```
+
+### 4. Configure Docker Memory Resources
+To prevent Cassandra from crashing due to Out-Of-Memory (OOM) issues, increase Docker's memory allocation:
+
+Open Docker Desktop → Settings → Resources
+
+Increase the memory limit:
+
+✅ Set to 6–8 GB
+
+💡 (Swap can stay at 1 GB)
+
+Click Apply & Restart
+Retry starting your Cassandra container
+
+---
 ## 🧪 Query Cassandra
 
 Enter Cassandra:
