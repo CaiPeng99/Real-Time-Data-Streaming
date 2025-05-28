@@ -16,7 +16,7 @@ This project demonstrates a real-time data streaming architecture built using mo
 - **PostgreSQL** – Backend metadata DB for Airflow
 - **Schema Registry & Control Center** – Kafka schema & monitoring
 
-📁 Folder Structure
+## 📁 Folder Structure
 ├── dags/ # Airflow DAGs for data generation and Kafka streaming
 │ └── kafka_stream.py
 ├── script/
@@ -31,12 +31,15 @@ This project demonstrates a real-time data streaming architecture built using mo
 🚀 Project Flow: Step-by-Step
 1. Data Generation with Airflow
 A **Airflow DAG** (kafka_stream.py) scheduled to run daily.
+
 Uses the `randomuser.me` API to generate fake user data.
+
 Sends the formatted JSON records to the Kafka topic users_created.
 <p align="center"> <img src="./resources/Airflow_DAG.png" alt="Airflow_DAG Diagram" width="900"/> </p>
 
 2. Kafka Broker
 Manages message streaming between producers and consumers.
+
 Configured with Zookeeper, Schema Registry, and Control Center via Docker Compose.
 
 3. Apache Spark Streaming
@@ -64,4 +67,4 @@ Docker check:
     <img src="./resources/Docker_2.png" alt=Cassandra Diagram" width="700"/>
 </p>
 Use cqlsh to query data:
-<pre lang="markdown"> ``` SELECT * FROM spark_streams.created_users; ``` </pre>
+<pre lang="markdown">  SELECT * FROM spark_streams.created_users;  </pre>
