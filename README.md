@@ -2,7 +2,7 @@
 🔧 Project Overview
 This project demonstrates a real-time data streaming architecture built using modern data engineering tools. It simulates real-world scenarios by fetching random user data from an external API, pushing it into a Kafka topic, processing it with Apache Spark, and persisting it into Apache Cassandra — all orchestrated using Apache Airflow and containerized using Docker Compose.
 <!-- ./realTIme_PIC/architecture.pn -->
-<p align="center"> <img src="./resources/architecture.png" alt="Architecture Diagram" width="700"/> </p>
+<p align="center"> <img src="./resources/architecture.png" alt="Architecture Diagram" width="900"/> </p>
 
 ---
 
@@ -34,7 +34,7 @@ This project demonstrates a real-time data streaming architecture built using mo
 A **Airflow DAG** (kafka_stream.py) scheduled to run daily.
 Uses the `randomuser.me` API to generate fake user data.
 Sends the formatted JSON records to the Kafka topic users_created.
-<p align="center"> <img src="./resources/Airflow_DAG.png" alt="Airflow_DAG Diagram" width="700"/> </p>
+<p align="center"> <img src="./resources/Airflow_DAG.png" alt="Airflow_DAG Diagram" width="900"/> </p>
 
 2. Kafka Broker
 Manages message streaming between producers and consumers.
@@ -44,7 +44,7 @@ Configured with Zookeeper, Schema Registry, and Control Center via Docker Compos
 Connects to **Kafka** to consume the users_created stream.
 Transforms JSON messages using Spark SQL.
 Writes the resulting data to Apache Cassandra in real-time.
-<p align="center"> <img src="./resources/Spark.png" alt="Spark Diagram" width="700"/> </p>
+<p align="center"> <img src="./resources/Spark.png" alt="Spark Diagram" width="900"/> </p>
 
 4. Apache Cassandra
 Stores the processed records in a table created_users within keyspace spark_streams.
@@ -60,4 +60,4 @@ PostgreSQL DB: exposed on port 5432
 Cassandra DB: accessible on port 9042
 
 Use cqlsh to query data:
-<pre lang="markdown"> ```sql SELECT * FROM spark_streams.created_users; ``` </pre>
+<pre lang="markdown"> ``` SELECT * FROM spark_streams.created_users; ``` </pre>
