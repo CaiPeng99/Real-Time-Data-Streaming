@@ -165,6 +165,14 @@ Use `cqlsh` inside the Cassandra container to validate data insertion:
 SELECT * FROM spark_streams.created_users;
 ```
 
+## 🙌 Inspiration
+
+This project was inspired by the excellent work shared in  
+🔗 [airscholar/e2e-data-engineering](https://github.com/airscholar/e2e-data-engineering/tree/main),  
+which showcases an end-to-end modern data engineering pipeline using open-source tools.
+
+Special thanks to their detailed architecture that guided the development of this pipeline.
+
 ## 🐳 Custom Spark Docker Image
 
 Instead of using a manual `spark-submit` command, this project builds a **custom Docker image** to encapsulate the Spark runtime, dependencies, and job execution logic.
