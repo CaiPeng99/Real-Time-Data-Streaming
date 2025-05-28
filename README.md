@@ -101,7 +101,6 @@ All services are containerized and orchestrated via Docker Compose.
 
 <p align="center">
   <img src="./resources/Docker_running.png" alt="Docker Running" width="700"/>
-  <br><br>
   <img src="./resources/Docker_2.png" alt="Docker Screenshot" width="700"/>
 </p>
 
@@ -110,6 +109,7 @@ All services are containerized and orchestrated via Docker Compose.
 ## 🧪 Query Cassandra
 
 Enter Cassandra:
+```py
 docker exec -it cassandra cqlsh -u cassandra -p cassandra localhost 9042
 
 Use `cqlsh` inside the Cassandra container to validate data insertion:
