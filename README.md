@@ -109,6 +109,9 @@ All services are containerized and orchestrated via Docker Compose.
 
 ## 🧪 Query Cassandra
 
+Enter Cassandra:
+docker exec -it cassandra cqlsh -u cassandra -p cassandra localhost 9042
+
 Use `cqlsh` inside the Cassandra container to validate data insertion:
 
 ```sql
