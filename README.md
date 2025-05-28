@@ -17,17 +17,16 @@ This project demonstrates a real-time data streaming architecture built using mo
 - **Schema Registry & Control Center** – Kafka schema & monitoring
 
 📁 Folder Structure
-.
-├── dags/                         # Airflow DAGs for data generation and Kafka streaming
-│   └── kafka_stream.py
+├── dags/ # Airflow DAGs for data generation and Kafka streaming
+│ └── kafka_stream.py
 ├── script/
-│   └── entrypoint.sh            # Entrypoint for Airflow containers
-├── spark_stream.py              # Main Spark job for Kafka to Cassandra
-├── docker-compose.yml           # Service definitions
-├── Dockerfile                   # (Optional) Build Spark images
-├── requirements.txt             # Python requirements
-├── run.sh, run-docker.sh        # Helper scripts
-└── jars/, path/, venv/          # (Optional) Dependencies and paths
+│ └── entrypoint.sh # Entrypoint for Airflow containers
+├── spark_stream.py # Main Spark job for Kafka to Cassandra
+├── docker-compose.yml # Service definitions
+├── Dockerfile # (Optional) Build Spark images
+├── requirements.txt # Python requirements
+├── run.sh, run-docker.sh # Helper scripts
+└── jars/, path/, venv/ # (Optional) Dependencies and paths
 
 🚀 Project Flow: Step-by-Step
 1. Data Generation with Airflow
@@ -59,5 +58,10 @@ Kafka Control Center: localhost:9021
 PostgreSQL DB: exposed on port 5432
 Cassandra DB: accessible on port 9042
 
+Docker check:
+<p align="center"> 
+    <img src="./resources/Docker_running.png" alt=Cassandra Diagram" width="700"/>
+    <img src="./resources/Docker_2.png" alt=Cassandra Diagram" width="700"/>
+</p>
 Use cqlsh to query data:
 <pre lang="markdown"> ``` SELECT * FROM spark_streams.created_users; ``` </pre>
