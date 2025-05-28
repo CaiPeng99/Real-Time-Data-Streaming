@@ -28,43 +28,88 @@ This project demonstrates a real-time data streaming architecture built using mo
 ├── run.sh, run-docker.sh # Helper scripts
 └── jars/, path/, venv/ # (Optional) Dependencies and paths
 
-🚀 Project Flow: Step-by-Step
-1. Data Generation with Airflow
-A **Airflow DAG** (kafka_stream.py) scheduled to run daily.
 
-Uses the `randomuser.me` API to generate fake user data.
+---
 
-Sends the formatted JSON records to the Kafka topic users_created.
-<p align="center"> <img src="./resources/Airflow_DAG.png" alt="Airflow_DAG Diagram" width="900"/> </p>
+## 🚀 Project Flow: Step-by-Step
 
-2. Kafka Broker
-Manages message streaming between producers and consumers.
+### 1. Data Generation with Airflow
 
-Configured with Zookeeper, Schema Registry, and Control Center via Docker Compose.
+A DAG (`kafka_stream.py`) scheduled to run daily fetches random user data from `randomuser.me` API and sends it to Kafka.
 
-3. Apache Spark Streaming
-Connects to **Kafka** to consume the users_created stream.
-Transforms JSON messages using Spark SQL.
-Writes the resulting data to Apache Cassandra in real-time.
-<p align="center"> <img src="./resources/Spark.png" alt="Spark Diagram" width="900"/> </p>
-
-4. Apache Cassandra
-Stores the processed records in a table created_users within keyspace spark_streams.
-Cassandra connection and table creation handled by spark_stream.py.
-Check Cassandra:
-<p align="center"> <img src="./resources/cassandra Check.png" alt=Cassandra Diagram" width="700"/> </p>
-
-
-Ports:
-Airflow Web UI: localhost:8080
-Kafka Control Center: localhost:9021
-PostgreSQL DB: exposed on port 5432
-Cassandra DB: accessible on port 9042
-
-Docker check:
-<p align="center"> 
-    <img src="./resources/Docker_running.png" alt=Cassandra Diagram" width="700"/>
-    <img src="./resources/Docker_2.png" alt=Cassandra Diagram" width="700"/>
+<p align="center">
+  <img src="./resources/Airflow_DAG.png" alt="Airflow DAG Diagram" width="900"/>
 </p>
-Use cqlsh to query data:
-<pre lang="markdown">  SELECT * FROM spark_streams.created_users;  </pre>
+
+---
+
+### 2. Kafka Broker
+
+Kafka handles message streaming between producers and consumers. It is configured with:
+- **Zookeeper**
+- **Schema Registry**
+- **Kafka Control Center**
+
+<p align="center">
+  <img src="./resources/Confluent.png" alt="Confluent Diagram" width="900"/>
+</p>
+
+These are orchestrated via Docker Compose.
+
+---
+
+### 3. Apache Spark Streaming
+
+- Spark connects to the `users_created` Kafka topic.
+- Parses and transforms JSON messages using Spark SQL.
+- Writes the output to **Apache Cassandra** in real time.
+
+<p align="center">
+  <img src="./resources/Spark.png" alt="Spark Streaming Diagram" width="900"/>
+</p>
+
+---
+
+### 4. Apache Cassandra
+
+- Cassandra stores all processed user records.
+- Data is inserted into the `created_users` table under keyspace `spark_streams`.
+- Connection and schema creation are handled within `spark_stream.py`.
+
+Check Cassandra state:
+
+<p align="center">
+  <img src="./resources/cassandra Check.png" alt="Cassandra Check" width="700"/>
+</p>
+
+---
+
+## 🌐 Ports
+
+| Service               | URL / Port          |
+|-----------------------|---------------------|
+| Airflow Web UI        | `http://localhost:8080` |
+| Kafka Control Center  | `http://localhost:9021` |
+| PostgreSQL DB         | `localhost:5432`     |
+| Cassandra DB          | `localhost:9042`     |
+
+---
+
+## 🐳 Docker Services
+
+All services are containerized and orchestrated via Docker Compose.
+
+<p align="center">
+  <img src="./resources/Docker_running.png" alt="Docker Running" width="700"/>
+  <br><br>
+  <img src="./resources/Docker_2.png" alt="Docker Screenshot" width="700"/>
+</p>
+
+---
+
+## 🧪 Query Cassandra
+
+Use `cqlsh` inside the Cassandra container to validate data insertion:
+
+```sql
+SELECT * FROM spark_streams.created_users;
