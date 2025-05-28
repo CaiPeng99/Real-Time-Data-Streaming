@@ -164,3 +164,34 @@ Use `cqlsh` inside the Cassandra container to validate data insertion:
 ```sql
 SELECT * FROM spark_streams.created_users;
 ```
+
+## 🐳 Custom Spark Docker Image
+
+Instead of using a manual `spark-submit` command, this project builds a **custom Docker image** to encapsulate the Spark runtime, dependencies, and job execution logic.
+
+### 🔨 Dockerfile for Spark
+
+```dockerfile
+FROM eclipse-temurin:17-jdk
+
+ENV SCALA_VERSION=2.13.8
+ENV SPARK_VERSION=3.5.5
+
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y curl unzip git python3 python3-pip && \
+    ln -sf /usr/bin/python3 /usr/bin/python
+
+# Install Cassandra driver for Python
+RUN pip install --no-cache-dir --break-system-packages cassandra-driver
+
+# Download and install Spark with Scala
+RUN curl -O https://downloads.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3-scala2.13.tgz && \
+    tar -xvzf spark-${SPARK_VERSION}-bin-hadoop3-scala2.13.tgz && \
+    mv spark-${SPARK_VERSION}-bin-hadoop3-scala2.13 /opt/spark && \
+    ln -s /opt/spark/bin/spark-submit /usr/bin/spark-submit && \
+    rm spark-${SPARK_VERSION}-bin-hadoop3-scala2.13.tgz
+
+# Set Spark environment variables
+ENV SPARK_HOME=/opt/spark
+ENV PATH=$PATH:$SPARK_HOME/bin
